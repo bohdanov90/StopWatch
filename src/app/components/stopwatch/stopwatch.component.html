@@ -1,4 +1,4 @@
-<div>00:00:00</div>
+<div>{{ stopwatchValue$ | async | date: 'HH:mm:ss':'UTC' }}</div>
 <button>Start/Stop</button>
 <button>Wait</button>
 <button>Reset</button>
