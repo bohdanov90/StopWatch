@@ -1,4 +1,4 @@
 export interface IStopwatch {
-  isPaused?: boolean;
-  value?: number;
+  isPaused: boolean;
+  value: number;
 }

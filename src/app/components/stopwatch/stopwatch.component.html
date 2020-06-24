@@ -1,4 +1,4 @@
-<div>{{ stopwatchValue$ | async | date: 'HH:mm:ss':'UTC' }}</div>
-<button>Start/Stop</button>
-<button>Wait</button>
-<button>Reset</button>
+<div>{{ stopwatchValue * 1000 | date: 'HH:mm:ss':'UTC' }}</div>
+<button (click)='onStartStopClick()'>Start / Stop</button>
+<button (click)='onWaitClick()' #waitButton>Wait</button>
+<button (click)='onResetClick()'>Reset</button>

@@ -1,40 +1,42 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, DoCheck } from '@angular/core';
 import { StopwatchLogicService } from '../../services/stopwatch-logic.service';
-import { Observable } from 'rxjs';
-import { tap, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-stopwatch',
   templateUrl: './stopwatch.component.html',
-  styleUrls: ['./stopwatch.component.scss']
+  styleUrls: ['./stopwatch.component.scss'],
 })
-export class StopwatchComponent implements OnInit {
-  public stopwatchValue$: Observable<any>;
+export class StopwatchComponent implements OnInit, OnDestroy, DoCheck {
 
-  constructor(
-    private stopwatchLogicService: StopwatchLogicService,
-  ) { }
+  @ViewChild('waitButton') waitButton: ElementRef;
+  public isWaitClicked: boolean;
+  public stopwatchValue: number;
+
+  constructor(private stopwatchLogicService: StopwatchLogicService) {}
 
   ngOnInit(): void {
-    this.init().subscribe();
+    this.stopwatchLogicService.initStopwatch();
   }
 
-  public init() {
-    return this.stopwatchValue$ = this.stopwatchLogicService.getValue$().pipe(
-      map(el => el.value * 1000),
-      tap(el => console.log(el)),
-    );
+  ngDoCheck() {
+    this.isWaitClicked = this.stopwatchLogicService.isWaitClicked;
+    this.stopwatchValue = this.stopwatchLogicService.stopwatchValue;
   }
 
-  public startStop(): void {
-    this.stopwatchLogicService.setValue({isPaused: false, value: 0});
+  ngOnDestroy(): void {
+    this.stopwatchLogicService.onDestroy$.next();
+    this.stopwatchLogicService.onDestroy$.complete();
   }
 
-  public wait(): void {
-    this.stopwatchLogicService.setValue({isPaused: true});
+  public onStartStopClick(): void {
+    this.stopwatchLogicService.startStopStopwatch();
   }
 
-  public reset(): void {
-    this.stopwatchLogicService.setValue({value: 0});
+  public onWaitClick(): void {
+    this.stopwatchLogicService.waitStopwatch(this.waitButton.nativeElement);
+  }
+
+  public onResetClick(): void {
+    this.stopwatchLogicService.resetStopwatch();
   }
 }
