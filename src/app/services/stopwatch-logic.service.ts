@@ -11,9 +11,9 @@ export class StopwatchLogicService {
     isPaused: true,
     value: 0,
   });
+  public onDestroy$: Subject<void> = new Subject<void>();
   public isWaitClicked = false;
   public stopwatchValue = 0;
-  public onDestroy$: Subject<void> = new Subject<void>();
 
   public initStopwatch(): void {
     this.stopwatch$
@@ -46,10 +46,6 @@ export class StopwatchLogicService {
     this.stopAndResetCounter();
   }
 
-  public resetStopwatch(): void {
-    this.startAndResetCounter();
-  }
-
   public waitStopwatch(button: Element): void {
     fromEvent(button, 'click').pipe(
       bufferTime(300),
@@ -63,6 +59,10 @@ export class StopwatchLogicService {
     }),
       takeUntil(this.onDestroy$),
     ).subscribe();
+  }
+
+  public resetStopwatch(): void {
+    this.startAndResetCounter();
   }
 
   private startAndResetCounter(): void {

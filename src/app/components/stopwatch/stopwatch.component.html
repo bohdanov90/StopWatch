@@ -1,8 +1,8 @@
-<div class="wrapper d-flex flex-column justify-content-center align-items-center bg-light text-dark">
-  <div class="mt-4 mb-4 rounded w-50 text-center bg-info text-white display-1">
-    {{ stopwatchValue * 1000 | date: 'HH:mm:ss':'UTC' }}
+<div class="d-flex flex-column justify-content-center align-items-center bg-light text-dark">
+  <div class="w-50 text-center bg-info text-white display-1 mt-4 mb-4 rounded">
+    {{ stopwatchLogicService.stopwatchValue * 1000 | date: 'HH:mm:ss':'UTC' }}
   </div>
-  <div class="buttons mt-4 mb-4">
+  <div>
     <button (click)='onStartStopClick()' type="button" class="btn btn-outline-info m-2">
       Start / Stop
     </button>

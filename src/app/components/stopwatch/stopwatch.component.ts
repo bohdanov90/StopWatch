@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, DoCheck } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { StopwatchLogicService } from '../../services/stopwatch-logic.service';
 
 @Component({
@@ -6,21 +6,14 @@ import { StopwatchLogicService } from '../../services/stopwatch-logic.service';
   templateUrl: './stopwatch.component.html',
   styleUrls: ['./stopwatch.component.scss'],
 })
-export class StopwatchComponent implements OnInit, OnDestroy, DoCheck {
+export class StopwatchComponent implements OnInit, OnDestroy {
 
   @ViewChild('waitButton') waitButton: ElementRef;
-  public isWaitClicked: boolean;
-  public stopwatchValue: number;
 
-  constructor(private stopwatchLogicService: StopwatchLogicService) {}
+  constructor(public stopwatchLogicService: StopwatchLogicService) {}
 
   ngOnInit(): void {
     this.stopwatchLogicService.initStopwatch();
-  }
-
-  ngDoCheck() {
-    this.isWaitClicked = this.stopwatchLogicService.isWaitClicked;
-    this.stopwatchValue = this.stopwatchLogicService.stopwatchValue;
   }
 
   ngOnDestroy(): void {
