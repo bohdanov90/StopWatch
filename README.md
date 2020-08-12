@@ -1,7 +1,16 @@
-# Project
+## StopWatch
 
-StopWatch with buttons
+**Description:**
 
-## Development server
+&nbsp;&nbsp; Minimalistic stopwatch with buttons.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+&nbsp;&nbsp; 'Start/Stop' - starts / stops + resets / continues timer if 'Wait' button was pressed.
+
+&nbsp;&nbsp; 'Wait' - pauses timer, works by double click.
+
+&nbsp;&nbsp; 'Reset' - resets and starts timer over.
+
+**Link to Demo:** [StopWatch](https://bohdanov90.github.io/StopWatch/ "StopWatch")
+
+
+**Tags:** _RxJS_, _Angular2+_, _TypeScript_
